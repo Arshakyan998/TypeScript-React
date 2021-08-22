@@ -8,7 +8,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
+  background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp8VDOOCRjxQIlq-btrySpakiXS50YiwpH9Q&usqp=CAU);
 }
 
 code {
@@ -23,11 +23,46 @@ code {
   margin:20px auto;
   overflow-y: scroll;
   box-shadow: 1px 2px 20px 8px gray;
-  transition: all 0.2s ease-out
+  transition: all 0.2s ease-out;
+  background-color: honeydew;
+  border-radius: 7px;
+  
+
 }
 
 .App:hover{
   box-shadow: 1px 2px 20px 8px red;
   transition: all 0.2s ease-in
 
+}
+/* полоса прокрутки (скроллбар) */
+
+.App::-webkit-scrollbar {
+  background: transparent;
+  width: 8px;
+}
+/* ползунок скроллбара */
+
+.App::-webkit-scrollbar-thumb {
+  background-color: none;
+  border-radius: 9em;
+  transition: all 0.7s ease ;
+
+}
+.App:hover::-webkit-scrollbar-thumb {
+  background-color: red;
+  border-radius: 9em;
+  transition:all 0.7s ease-in ;
+}
+
+
+/* Стрелки */
+
+
+.App::-webkit-scrollbar-button:vertical:start:decrement {
+display: none;
+}
+
+.App::-webkit-scrollbar-button:vertical:end:increment {
+display: none;     
 }

@@ -10,10 +10,9 @@ export interface iState {
 }
 
 const Main: React.FC = () => {
-  const [todos, setToDos] = React.useState<iState[]>([
-  ]);
+  const [todos, setToDos] = React.useState<iState[]>([]);
 
-  const [toDoClone, setToDoClone] = React.useState<iState[]>([...todos]);
+  const [toDoClone, setToDoClone] = React.useState<iState[]>([]);
  
 
 const fetchToDos=async()=>{
@@ -24,7 +23,7 @@ const fetchToDos=async()=>{
         setToDoClone([...result])
  
         } catch (e) {
-                console.error(e.messege);
+                console.log(e.message);
                 
         }
 }
