@@ -20,8 +20,8 @@ const RenderToDos: React.FC<Props> = ({
     cgnageTodoComplited(id);
   };
 
-  const complited = todo.filter((element) => element.isComplited);
-  const inDoing = todo.filter((element) => element.isComplited === false);
+  const complited = todo.filter((element) => element.completed);
+  const inDoing = todo.filter((element) => element.completed === false);
 
   return (
     <div>
@@ -36,10 +36,10 @@ const RenderToDos: React.FC<Props> = ({
                   alignItems: "center",
                 }}
               >
-                {i+1} . {element.text}{" "}
+                {i+1} . {element.title}{" "}
                 <input
                   type="checkbox"
-                  checked={element.isComplited ? true : false}
+                  checked={element.completed ? true : false}
                   style={{ width: "55px", height: "55px" }}
                   onChange={() => changeComplited(element.id)}
                 />{" "}

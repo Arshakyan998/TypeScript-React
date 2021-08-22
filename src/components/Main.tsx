@@ -5,32 +5,34 @@ import { Serch } from "./Serch";
 
 export interface iState {
   id: number;
-  isComplited?: Boolean;
-  text: string;
+  completed?: Boolean;
+  title: string;
 }
 
 const Main: React.FC = () => {
   const [todos, setToDos] = React.useState<iState[]>([
-    {
-      id: 1,
-      isComplited: false,
-      text: "Выучить TYPE SCRIPT",
-    },
-
-    {
-      id: 2,
-      isComplited: true,
-      text: "Выучить React",
-    },
-    {
-      id: 3,
-      isComplited: true,
-      text: "Выучить JS",
-    },
   ]);
 
   const [toDoClone, setToDoClone] = React.useState<iState[]>([...todos]);
+ 
 
+const fetchToDos=async()=>{
+        try {
+        const response=await fetch('https://jsonplaceholder.typicode.com/todos?_limit=20')
+        const result=await response.json()
+        setToDos([...result]);
+        setToDoClone([...result])
+ 
+        } catch (e) {
+                console.error(e.messege);
+                
+        }
+}
+  
+  React.useEffect(()=>{
+ fetchToDos()
+  },[])
+  
   const RemoveItem = (id: number) => {
     const result = todos.filter((element) => element.id !== id);
     const resForClone = toDoClone.filter((element) => element.id !== id);
@@ -42,7 +44,7 @@ const Main: React.FC = () => {
   const cgnageTodoComplited = (id: number) => {
     let newState = todos.filter((element) => {
       if (element.id === id) {
-        element.isComplited = !element.isComplited;
+        element.completed = !element.completed;
       }
       return element;
     });
@@ -52,9 +54,11 @@ const Main: React.FC = () => {
   const newTodo = (val: string) => {
     const result = {
       id: Date.now(),
-      isComplited: false,
-      text: val,
+      completed: false,
+      title: val,
     };
+
+    
 
     setToDos([...todos, result]);
     setToDoClone([...toDoClone, result]);
@@ -63,7 +67,7 @@ const Main: React.FC = () => {
   const serchInToDo = (e: React.FormEvent<HTMLInputElement>): void => {
     if (e.currentTarget.value !== "") {
       let result = [...todos].filter((element) =>
-        element.text.toLowerCase().includes(e.currentTarget.value.toLowerCase())
+        element.title.toLowerCase().includes(e.currentTarget.value.toLowerCase())
       );
 
       setToDos(result);
